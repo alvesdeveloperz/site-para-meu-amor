@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para minha Fernanda 🖤</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      background: linear-gradient(135deg, #1b1b1b, #3b0d0d, #1b1b1b);
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    /* TELA INICIAL */
+    .intro {
+      margin-bottom: 25px;
+      max-width: 500px;
+      font-family: 'Special Elite', monospace;
+      opacity: 0.9;
+    }
+
+    .open-btn {
+      padding: 15px 35px;
+      background: #7a0000;
+      border: none;
+      color: white;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #900;
+      transition: 0.3s;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #c00;
+    }
+
+    .card {
+      display: none;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: 35px;
+      max-width: 800px;
+      width: 95%;
+      box-shadow: 0 0 40px #500;
+      text-align: center;
+      animation: fade 1.5s ease;
+    }
+
+    @keyframes fade {
+      from {opacity:0; transform: translateY(20px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+
+    h1 {
+      color: #ff4d4d;
+      text-shadow: 0 0 8px red;
+    }
+
+    p {
+      font-family: 'Special Elite', monospace;
+      line-height: 1.6;
+    }
+
+    ul {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    /* GALERIA */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 25px;
+      justify-items: center;
+      align-items: center;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .music-btn {
+      margin-top: 15px;
+      padding: 8px 14px;
+      background: #300;
+      color: white;
+      border: 1px solid #900;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .signature {
+      margin-top: 20px;
+      opacity: 0.7;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NOVA MENSAGEM INICIAL -->
+  <div class="intro" id="introText">
+    <p>
+      Fernanda...<br><br>
+      eu fiz isso com muito carinho pra você.<br>
+      espero que você goste,<br>
+      porque eu te amo muito ❤️
+    </p>
+  </div>
+
+  <button class="open-btn" id="start">❤️ Abrir a carta</button>
+
+
+<div class="card" id="card">
+
+  <h1 id="title"></h1>
+
+  <p>
+    Fernanda,<br><br>
+    eu poderia escrever mil textos…<br>
+    mas a verdade é simples:<br>
+    <b>eu te amo para sempreeeeeeeeee!</b>
+  </p>
+
+  <h3>10 coisas que eu amo em você!:</h3>
+
+  <ul>
+    <li>Seu sorriso lindo</li>
+    <li>Seu jeito carinhoso</li>
+    <li>Seu amor por rock</li>
+    <li>Nossas conversas até tarde</li>
+    <li>Seu cabelo lindo</li>
+    <li>Sua risada</li>
+    <li>Seu olhar intenso</li>
+    <li>Como você me entende e me ama</li>
+    <li>Nossas memórias inesquecíveis</li>
+    <li>Você ser minha 🖤</li>
+  </ul>
+
+  <div class="gallery">
+    <img src="foto1.jpeg">
+    <img src="foto2.jpeg">
+    <img src="foto3.jpeg">
+    <img src="foto4.jpeg">
+  </div>
+
+  <button class="music-btn" onclick="toggleMusic()">🎵 música</button>
+
+  <p class="signature">
+    feito com amor por Nathanael ❤️
+  </p>
+
+</div>
+
+<audio id="music" src="musica.mp3" loop></audio>
+
+<script>
+  const btn = document.getElementById("start");
+  const card = document.getElementById("card");
+  const title = document.getElementById("title");
+  const music = document.getElementById("music");
+  const intro = document.getElementById("introText");
+
+  const text = "Fernanda, você é minha ❤️";
+  let i = 0;
+
+  btn.onclick = () => {
+    btn.style.display = "none";
+    intro.style.display = "none"; // esconde a mensagem inicial
+    card.style.display = "block";
+    music.play();
+    type();
+  };
+
+  function type() {
+    if (i < text.length) {
+      title.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, 45);
+    }
+  }
+
+  function toggleMusic() {
+    if (music.paused) music.play();
+    else music.pause();
+  }
+</script>
+
+</body>
+</html>
