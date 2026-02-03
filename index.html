@@ -11,7 +11,7 @@
     body {
       margin: 0;
       font-family: 'Cinzel', serif;
-      background: linear-gradient(135deg, #1b1b1b, #3b0d0d, #1b1b1b);
+      background: linear-gradient(135deg, #2b2b2b, #4b0f0f, #2b2b2b);
       color: #eee;
       display: flex;
       justify-content: center;
@@ -21,12 +21,25 @@
       flex-direction: column;
     }
 
-    /* TELA INICIAL */
+    /* ===== LOGO MONSTER ===== */
+    .monster-top {
+      width: 70px;
+      opacity: 0.8;
+      margin-bottom: 15px;
+      filter: grayscale(100%) brightness(1.2);
+    }
+
+    .monster-bottom {
+      width: 40px;
+      opacity: 0.5;
+      margin-top: 15px;
+      filter: grayscale(100%);
+    }
+
     .intro {
-      margin-bottom: 25px;
       max-width: 500px;
+      margin-bottom: 25px;
       font-family: 'Special Elite', monospace;
-      opacity: 0.9;
     }
 
     .open-btn {
@@ -52,21 +65,21 @@
       backdrop-filter: blur(6px);
       border-radius: 20px;
       padding: 35px;
-      max-width: 800px;
+      max-width: 850px;
       width: 95%;
       box-shadow: 0 0 40px #500;
-      text-align: center;
-      animation: fade 1.5s ease;
+      animation: fade 1.2s ease;
     }
 
     @keyframes fade {
-      from {opacity:0; transform: translateY(20px);}
+      from {opacity:0; transform: translateY(15px);}
       to {opacity:1; transform: translateY(0);}
     }
 
     h1 {
       color: #ff4d4d;
       text-shadow: 0 0 8px red;
+      cursor: pointer;
     }
 
     p {
@@ -79,21 +92,18 @@
       margin-top: 20px;
     }
 
-    /* GALERIA */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
+      gap: 12px;
       margin-top: 25px;
-      justify-items: center;
-      align-items: center;
     }
 
     .gallery img {
       width: 100%;
       border-radius: 12px;
-      transition: 0.3s;
       box-shadow: 0 0 10px #000;
+      transition: 0.3s;
     }
 
     .gallery img:hover {
@@ -115,12 +125,28 @@
       opacity: 0.7;
       font-size: 14px;
     }
+
+    .secret {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      border: 1px solid #900;
+      padding: 15px 25px;
+      border-radius: 12px;
+      display: none;
+      box-shadow: 0 0 20px red;
+      font-family: 'Special Elite', monospace;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- NOVA MENSAGEM INICIAL -->
+  <!-- LOGO TOPO -->
+  <img src="monster.png" class="monster-top">
+
   <div class="intro" id="introText">
     <p>
       Fernanda...<br><br>
@@ -132,81 +158,96 @@
 
   <button class="open-btn" id="start">❤️ Abrir a carta</button>
 
+  <div class="card" id="card">
 
-<div class="card" id="card">
+    <h1 id="title"></h1>
 
-  <h1 id="title"></h1>
+    <p>
+      eu poderia escrever mil textos…<br>
+      mas a verdade é simples:<br>
+      <b>você é minha pessoa favorita no mundo inteiro!</b>
+    </p>
 
-  <p>
-    Fernanda,<br><br>
-    eu poderia escrever mil textos…<br>
-    mas a verdade é simples:<br>
-    <b>eu te amo para sempreeeeeeeeee!</b>
-  </p>
+    <ul>
+      <li>Seu sorriso lindo</li>
+      <li>Seu jeito carinhoso</li>
+      <li>Seu amor por rock</li>
+      <li>Nossas conversas até tarde</li>
+      <li>Seu cabelo lindo</li>
+      <li>Sua risada</li>
+      <li>Seu olhar intenso</li>
+      <li>Como você me entende e me ama</li>
+      <li>Nossas memórias inesquecíveis</li>
+      <li>Você ser minha 🖤</li>
+    </ul>
 
-  <h3>10 coisas que eu amo em você!:</h3>
+    <div class="gallery">
+      <img src="foto1.jpeg">
+      <img src="foto2.jpeg">
+    </div>
 
-  <ul>
-    <li>Seu sorriso lindo</li>
-    <li>Seu jeito carinhoso</li>
-    <li>Seu amor por rock</li>
-    <li>Nossas conversas até tarde</li>
-    <li>Seu cabelo lindo</li>
-    <li>Sua risada</li>
-    <li>Seu olhar intenso</li>
-    <li>Como você me entende e me ama</li>
-    <li>Nossas memórias inesquecíveis</li>
-    <li>Você ser minha 🖤</li>
-  </ul>
+    <button class="music-btn" onclick="toggleMusic()">🎵 música</button>
+    <button class="music-btn" onclick="showSecret()">💌 mensagem secreta</button>
 
-  <div class="gallery">
-    <img src="foto1.jpeg">
-    <img src="foto2.jpeg">
-    <img src="foto3.jpeg">
-    <img src="foto4.jpeg">
+    <p class="signature">feito com amor por Nathanael</p>
+
+    <!-- LOGO RODAPÉ -->
+    <img src="monster.png" class="monster-bottom">
+
   </div>
 
-  <button class="music-btn" onclick="toggleMusic()">🎵 música</button>
+  <div class="secret" id="secretMsg">
+    💌 Você me faz feliz todos os dias, só de conversar comigo. Seu jeito muda o meu mundo.
+  </div>
 
-  <p class="signature">
-    feito com amor por Nathanael ❤️
-  </p>
+  <audio id="music" src="musica.mp3" loop></audio>
 
-</div>
+  <script>
+    const btn = document.getElementById("start");
+    const card = document.getElementById("card");
+    const title = document.getElementById("title");
+    const music = document.getElementById("music");
+    const intro = document.getElementById("introText");
+    const secret = document.getElementById("secretMsg");
 
-<audio id="music" src="musica.mp3" loop></audio>
+    const text = "Fernanda, você é minha pessoa favorita no mundo! ❤️";
+    let i = 0;
+    let clicks = 0;
 
-<script>
-  const btn = document.getElementById("start");
-  const card = document.getElementById("card");
-  const title = document.getElementById("title");
-  const music = document.getElementById("music");
-  const intro = document.getElementById("introText");
+    btn.onclick = () => {
+      btn.style.display = "none";
+      intro.style.display = "none";
+      card.style.display = "block";
+      music.play();
+      type();
+    };
 
-  const text = "Fernanda, você é minha ❤️";
-  let i = 0;
-
-  btn.onclick = () => {
-    btn.style.display = "none";
-    intro.style.display = "none"; // esconde a mensagem inicial
-    card.style.display = "block";
-    music.play();
-    type();
-  };
-
-  function type() {
-    if (i < text.length) {
-      title.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(type, 45);
+    function type() {
+      if (i < text.length) {
+        title.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 45);
+      }
     }
-  }
 
-  function toggleMusic() {
-    if (music.paused) music.play();
-    else music.pause();
-  }
-</script>
+    function toggleMusic() {
+      if (music.paused) music.play();
+      else music.pause();
+    }
+
+    function showSecret() {
+      secret.style.display = "block";
+      setTimeout(() => secret.style.display = "none", 5000);
+    }
+
+    title.onclick = () => {
+      clicks++;
+      if (clicks === 3) {
+        showSecret();
+        clicks = 0;
+      }
+    };
+  </script>
 
 </body>
 </html>
